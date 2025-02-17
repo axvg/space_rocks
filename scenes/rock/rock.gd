@@ -18,6 +18,9 @@ func start(_position, _velocity, _size):
 	linear_velocity = _velocity
 	angular_velocity = randf_range(-PI, PI)
 
+func explode():
+	print("boom")
+
 # to wrap around the screen
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	var xform = state.transform
