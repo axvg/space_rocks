@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dmo3d2bdtiaeh"]
+[gd_scene load_steps=5 format=3 uid="uid://dmo3d2bdtiaeh"]
 
 [ext_resource type="Script" path="res://scenes/rock/rock.gd" id="1_5o4xw"]
 [ext_resource type="Texture2D" uid="uid://df4uv4te3tp7m" path="res://assets/rock.png" id="1_yrabg"]
+[ext_resource type="PackedScene" uid="uid://ctkkc3ifwxmnj" path="res://scenes/explosion/explosion.tscn" id="3_bm1ci"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dyp0m"]
 bounce = 1.0
@@ -15,3 +16,6 @@ script = ExtResource("1_5o4xw")
 texture = ExtResource("1_yrabg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="Explosion" parent="." instance=ExtResource("3_bm1ci")]
+visible = false

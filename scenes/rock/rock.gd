@@ -2,6 +2,8 @@ extends RigidBody2D
 
 var screensize = Vector2.ZERO
 
+signal exploded
+
 var size
 var radius
 var scale_factor = .2
@@ -17,9 +19,19 @@ func start(_position, _velocity, _size):
 	$CollisionShape2D.shape = shape
 	linear_velocity = _velocity
 	angular_velocity = randf_range(-PI, PI)
+	$Explosion.scale = Vector2.ONE * .75 * size
 
 func explode():
-	print("boom")
+	$CollisionShape2D.set_deferred("disabled", true)
+	$Sprite2D.hide()
+	$Explosion/AnimationPlayer.play("new_animation") # change this!
+	$Explosion.show()
+	exploded.emit(size, radius, position, linear_velocity)
+	linear_velocity = Vector2.ZERO
+	angular_velocity = 0
+	await $Explosion/AnimationPlayer.animation_finished
+	queue_free()
+
 
 # to wrap around the screen
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
